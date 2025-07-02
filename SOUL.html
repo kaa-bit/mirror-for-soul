@@ -9,15 +9,15 @@
   <p id="result"></p>
 
   <script type="text/javascript">
-    var myWidget = cloudinary.createUploadWidget({
-      cloudName: 'dm7gfgtgq',
-      uploadPreset: 'MIRROR FOR SOUL'
-    }, (error, result) => {
-      if (!error && result && result.event === "success") {
-        document.getElementById("result").innerText = result.info.secure_url;
-      }
-    });
-
+var myWidget = cloudinary.createUploadWidget({
+  cloudName: 'dm7gfgtgq',
+  uploadPreset: 'MIRROR FOR SOUL'
+}, (error, result) => {
+  if (!error && result && result.event === "success") {
+    const imageURL = result.info.secure_url;
+    ThunkableWebviewerExtension.postMessage(imageURL);
+  }
+});
     document.getElementById("upload_widget").addEventListener("click", function(){
       myWidget.open();
     }, false);
